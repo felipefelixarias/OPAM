@@ -11,9 +11,8 @@ class Map:
         self.map_size = map.shape
         self.pix_per_meter = pix_per_meter
         self.agent_radius = agent_radius
-        self.map = map
+        self.map = np.asarray(map)
         self.episodes = None
-        # self.raytraced_paths = None
         self.agent_radius = agent_radius
         self.visitation_counts = np.zeros(self.map.shape)
         self.predicted_occupancy = np.zeros(self.map.shape)
@@ -85,6 +84,23 @@ class Map:
             pixel_path.extend(bresenham_line(prev_pixel, next_pixel, -1))
 
         return pixel_path
+
+    def display_map(self):
+        im = np.asarray(self.map)
+        im /= im.max()
+        im *= 255
+        
+        image = Image.fromarray(im.astype(np.uint8))
+        image.show()
+
+    def display_visitation_counts(self):
+        map_mask = (self.map == self.free).astype(int)
+        im = np.asarray(self.visitation_counts)
+        im /= im.max()
+        im *= 255
+        im = im * map_mask 
+        image = Image.fromarray(im.astype(np.uint8))
+        image.show()   
 
     def display_criticality_image(self):
         pass
