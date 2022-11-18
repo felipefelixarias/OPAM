@@ -1,9 +1,18 @@
 import numpy as np
-from opam import Map
+from os import getcwd
 
-env_names = ['empty', 'simple', 'complex']
+from map import Map
+from core import Core
 
 if __name__ == '__main__':
     #Generate map objest
-    for env_name in env_names:
-        print('Generating map object for environment: ' + env_name)
+
+    core = Core()
+
+    map_path = getcwd() + '/data/maps/'
+    core.load_maps(map_path)
+    episode_path = getcwd() + '/data/episodes/'
+    core.load_episodes(episode_path)
+
+    test_map = core.maps.popitem()[1]
+    test_map.display_map()

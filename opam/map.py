@@ -10,10 +10,9 @@ class Map:
         self.env_name = env_name
         self.map_size = map.shape
         self.pix_per_meter = pix_per_meter
-        self.agent_radius = agent_radius
+        self.agent_radius = agent_radius*(pix_per_meter/10)
         self.map = np.asarray(map)
         self.episodes = None
-        self.agent_radius = agent_radius
         self.visitation_counts = np.zeros(self.map.shape)
         self.predicted_occupancy = np.zeros(self.map.shape)
         self.distilled_predicted_occupancy = np.zeros(self.map.shape)
@@ -34,7 +33,7 @@ class Map:
                 swept_area = self.swept_area(pixel_path)
                 self.visitation_counts += swept_area
 
-    def swept_area(self,path):
+    def swept_area(self, path):
         swept_area = np.zeros(self.map.shape)
 
         if self.is_path_valid(path):
@@ -49,7 +48,7 @@ class Map:
 
     def is_path_valid(self, path):
         for pos in path:
-            if self.map(pos[0], pos[1]) == self.obstacle:
+            if self.map[pos[0], pos[1]] == self.obstacle:
                 return False
         return True
 
@@ -68,9 +67,9 @@ class Map:
         for pos in path:
             if isnan(pos[0]) or isnan(pos[1]):
                 continue
-            x_pos = offset_x + int(pos[0]*self.pix_per_meter)
-            y_pos = offset_y - int(pos[1]*self.pix_per_meter)
-            pixel_path.append([x_pos, y_pos])
+            x_pos = offset_x + round(pos[0]*self.pix_per_meter)
+            y_pos = offset_y + round(pos[1]*self.pix_per_meter)
+            pixel_path.append([y_pos, x_pos])
 
         return pixel_path
 
@@ -87,18 +86,15 @@ class Map:
 
     def display_map(self):
         im = np.asarray(self.map)
-        im /= im.max()
+        im = im / np.max(im)
         im *= 255
         
         image = Image.fromarray(im.astype(np.uint8))
         image.show()
 
     def display_visitation_counts(self):
-        map_mask = (self.map == self.free).astype(int)
-        im = np.asarray(self.visitation_counts)
-        im /= im.max()
-        im *= 255
-        im = im * map_mask 
+        im = np.copy(self.map) 
+        im[self.visitation_counts>0] = self.visitation_counts[self.visitation_counts>0]
         image = Image.fromarray(im.astype(np.uint8))
         image.show()   
 
