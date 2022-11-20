@@ -94,7 +94,8 @@ class Map:
 
     def display_visitation_counts(self):
         im = np.copy(self.map) 
-        im[self.visitation_counts>0] = self.visitation_counts[self.visitation_counts>0]
+        normalized_vis_counts = self.visitation_counts / np.max(self.visitation_counts)
+        im[self.visitation_counts>0] = normalized_vis_counts[self.visitation_counts>0]*255
         image = Image.fromarray(im.astype(np.uint8))
         image.show()   
 
