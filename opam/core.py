@@ -3,7 +3,7 @@ from json import load, dump
 from os import listdir
 from PIL import Image
 
-from map import Map
+from opam.map import Map
 
 class Core:
     def __init__(self):
@@ -54,3 +54,8 @@ class Core:
             ep_list.append(ped_list)
         
         return ep_list
+
+    #TODO: Add code to simulate episodes over the maps, this may only be useful 
+    # for users that don't have data and adds the orca dependency
+    def simulate_episodes(self):
+        pass
