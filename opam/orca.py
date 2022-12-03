@@ -140,6 +140,9 @@ class Orca:
 
       def recreate_example(self):
             """Recreate the example from the RVO2 library"""
+            self.add_agents()
+            self.process_map()
+
             self.sim.setAgentPrefVelocity(self.agents[0], (1, 1))
             self.sim.setAgentPrefVelocity(self.agents[1], (-1, 1))
             self.sim.setAgentPrefVelocity(self.agents[2], (-1, -1))
@@ -160,6 +163,6 @@ class Orca:
 
 #TODO: Get positions of agents and overlay them on the small_square image.
 
-orca = Orca(map=np.zeros((10,10)), pix_per_meter=10)
+# orca = Orca(map=np.zeros((10,10)), pix_per_meter=10)
 
-orca.recreate_example()
+# orca.recreate_example()
