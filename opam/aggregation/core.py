@@ -4,13 +4,13 @@ from os import listdir
 from typing import Any, DefaultDict, Dict, List, NamedTuple, Optional, Set, Tuple, Union, BinaryIO
 from PIL import Image
 
-from opam.map import Map
-from opam.orca import Orca
+from opam.environment.map import Map
+from opam.simulation.orca import Orca
 
-class Core:
+class Aggregator:
     def __init__(self):
         """Class for annotating multiple maps, loading/simulating episodes
-        and generating training data for the model.
+        and generating training data for machine learning models.
         
         Attributes
         ----------
