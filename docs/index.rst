@@ -6,7 +6,7 @@
 OPAM's API documentation
 ================================
 OPAM, or occupancy prediction and annotation for maps, is a library for learning
-and analyzing motion patterns in environments with a binary traversability maps.
+and analyzing motion patterns in environments with traversability maps.
 
 For a walkthrough, check out the tutorials.
 

@@ -1,15 +1,16 @@
 import rvo2
 import numpy as np 
 
-class Orca:
+from opam.simulation.core import Simulator
+from opam.environment import Environment
+
+class Orca(Simulator):
       """Simulator for pedestrians using the RVO2 library
       
       Parameters
       ----------
-      map
-            Binary traversability map of environment
-      pix_per_meter
-            Number of pixels per meter in the map
+      environment
+            Environment object to simulate in
       time_step
             Time step for simulation
       nieghbor_dist
@@ -43,7 +44,7 @@ class Orca:
 
       Attributes
       ----------
-      map
+      environment
             See above
       time_step
             See above
@@ -71,8 +72,7 @@ class Orca:
       """
       def __init__(
             self, 
-            map: np.ndarray,
-            pix_per_meter: float,
+            environment: type[Environment],
             time_step: float = 1/60,
             neighbor_dist: float = 1.5,
             max_neighbors: int = 5,
@@ -82,7 +82,7 @@ class Orca:
             max_speed: float = 2.0,
             num_agents: int = 5
             ) -> None:
-            self.map = map
+            super().__init__(environment)
             self.time_step = time_step
             self.neighbor_dist = neighbor_dist
             self.max_neighbors = max_neighbors
@@ -126,6 +126,7 @@ class Orca:
             """
 
             #Assume agents have already been added to the simulator
+            pass
 
       def add_agents(self):
             """Add agents to the simulation

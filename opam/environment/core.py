@@ -7,7 +7,7 @@ import logging
 from utils.annotation import make_gaussian, make_gaussian, bresenham_line
 
 
-class Map:
+class Environment:
     """Class containing all information relevant to a single environment
 
     Parameters

@@ -4,7 +4,7 @@ from os import listdir
 from typing import Any, DefaultDict, Dict, List, NamedTuple, Optional, Set, Tuple, Union, BinaryIO
 from PIL import Image
 
-from opam.environment.map import Map
+from opam.environment import Environment
 from opam.simulation.orca import Orca
 
 class Aggregator:
@@ -59,7 +59,7 @@ class Aggregator:
         for map_name in listdir(map_path):
             map = Image.open(map_path + map_name)
             map = np.asarray(map)
-            self.maps[map_name[:-4]] = Map(map_name[:-4], map, pix_per_meter)
+            self.maps[map_name[:-4]] = Environment(map_name[:-4], map, pix_per_meter)
 
     def load_episodes(self, 
         episodes_path: str, 
