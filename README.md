@@ -5,7 +5,7 @@ OPAM, or occupancy prediction and annotation for maps, is a library for learning
 ## Installation 
 While we intend to support multiple installation methods in the future, the easiest way to get started is run the following commands:
 
-'''bash
+```bash
 git clone https://github.com/felipefelixarias/OPAM.git --recursive
 cd OPAM 
 conda create -n opam python=3.6
@@ -16,7 +16,7 @@ python setup.py build
 python setup.py install
 cd ../..
 pip install -e .
-'''
+```
 
 
 
